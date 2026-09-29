@@ -1,26 +1,25 @@
 # Stock Market Data Analysis Dashboard
 
-Interactive dashboard for visualizing and analyzing stock market data — built with Streamlit and Plotly.
+Interactive dashboard for visualizing and analyzing stock market data — built with Streamlit, Matplotlib and Seaborn.
 
 ## Features
-- Real-time and historical price charts
-- Technical indicators (EMA, RSI, MACD, Bollinger Bands)
-- Multi-ticker comparison
-- Volume and volatility analysis
+- Historical price chart from Yahoo Finance with 50/200-day simple moving averages
+- Daily returns distribution and 20-day rolling volatility
+- Statistical summary of the selected date range
+- Input validation with clear errors for empty symbols, bad date ranges and unknown tickers
 
-## Requirements
-```
-pip install streamlit plotly pandas yfinance ta
+## Installation
+```bash
+pip install -r requirements.txt
 ```
 
 ## Usage
 ```bash
-streamlit run app.py
+streamlit run stock_analysis.py
 ```
 
 Open `http://localhost:8501` in your browser.
 
 ## License
 MIT
-<!-- updated: 2025-12-20-r01 -->
 
