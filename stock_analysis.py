@@ -18,10 +18,25 @@ end_date = st.sidebar.date_input("End Date", pd.to_datetime("today"))
 @st.cache_data
 def get_stock_data(symbol, start, end):
     df = yf.download(symbol, start=start, end=end)
+    # Newer yfinance versions return MultiIndex columns even for a single ticker
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
     return df
+
+# Validate input
+stock_symbol = stock_symbol.strip().upper()
+if not stock_symbol:
+    st.warning("Please enter a stock symbol.")
+    st.stop()
+if start_date >= end_date:
+    st.error("Start date must be before end date.")
+    st.stop()
 
 # Load data
 data = get_stock_data(stock_symbol, start_date, end_date)
+if data.empty:
+    st.error(f"No data found for '{stock_symbol}' in the selected date range. Check the symbol and dates.")
+    st.stop()
 
 # Display Raw Data
 st.subheader(f"Stock Data for {stock_symbol}")
